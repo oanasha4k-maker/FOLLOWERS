@@ -373,4 +373,820 @@
     .act-hd{
       background:rgba(191,95,255,.06);padding:9px 13px;
       display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(191,95,255,.15);
-      font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--purple);letter-
+      font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--purple);letter-spacing:2px;
+    }
+    .act-dot-p{width:7px;height:7px;border-radius:50%;background:var(--purple);box-shadow:0 0 8px var(--purple);animation:pulse 1.3s ease-in-out infinite}
+    .act-scroll{height:160px;overflow:hidden}
+    .act-inner{animation:scroll 22s linear infinite}
+    .act-row{display:flex;align-items:center;gap:10px;padding:9px 13px;border-bottom:1px solid rgba(191,95,255,.05)}
+    .act-d{width:7px;height:7px;border-radius:50%;background:var(--purple);flex-shrink:0;box-shadow:0 0 5px var(--purple)}
+    .act-main{flex:1;font-size:.8rem;color:#ccc}
+    .act-sub{font-size:.7rem;color:#444;font-family:'Share Tech Mono',monospace}
+    .act-v{color:var(--gold);font-family:'Share Tech Mono',monospace;font-size:.78rem}
+
+    /* ── MODALS ── */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);backdrop-filter:blur(12px);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+    .overlay.open{display:flex}
+    .mbox{
+      background:rgba(0,6,0,.98);border:1px solid var(--border2);border-radius:16px;padding:26px;
+      max-width:380px;width:100%;box-shadow:var(--glow-lg);position:relative;
+      animation:popIn .28s ease;
+    }
+    .mbox-purple{border-color:rgba(191,95,255,.5);box-shadow:0 0 30px rgba(191,95,255,.2)}
+    @keyframes popIn{from{opacity:0;transform:scale(.88)translateY(18px)}to{opacity:1;transform:scale(1)translateY(0)}}
+    .mclose{position:absolute;top:13px;right:13px;background:none;border:none;color:#444;font-size:1.2rem;cursor:pointer;transition:color .2s}
+    .mclose:hover{color:var(--red)}
+    .mtitle{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;color:var(--neon);text-shadow:var(--glow);margin-bottom:16px}
+    .mrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(0,255,65,.06);font-size:.88rem}
+    .mrow:last-of-type{border-bottom:none}
+    .mk{color:#555}.mv{color:var(--neon);font-weight:600}
+
+    /* ── INSTAGRAM PROFILE CARD ── */
+    .insta-profile-wrap{
+      display:flex;flex-direction:column;align-items:center;
+    }
+    .insta-profile-card{
+      display:flex;align-items:center;gap:18px;
+      background:rgba(0,8,0,.95);
+      border:1px solid var(--border2);
+      border-radius:18px;padding:18px 22px;width:100%;max-width:420px;
+      box-shadow:0 0 28px rgba(0,255,65,.08);
+      animation:cardPop .6s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes cardPop{from{opacity:0;transform:translateY(18px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+    /* Story-ring glow around avatar */
+    .insta-glow-ring{
+      flex-shrink:0;
+      width:72px;height:72px;border-radius:50%;
+      padding:3px;
+      background:conic-gradient(#f09433,#e6683c,#dc2743,#cc2366,#bc1888,#bc1888,#f09433);
+      animation:ringRotate 4s linear infinite;
+      box-shadow:0 0 14px rgba(220,39,67,.5);
+    }
+    @keyframes ringRotate{to{filter:hue-rotate(360deg)}}
+    .insta-avatar-wrap{
+      width:100%;height:100%;border-radius:50%;
+      padding:2px;background:#000;
+    }
+    .insta-avatar{
+      width:100%;height:100%;border-radius:50%;
+      object-fit:cover;display:block;
+    }
+
+    .insta-profile-info{flex:1}
+    .insta-username{
+      font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;
+      color:#fff;display:flex;align-items:center;gap:5px;margin-bottom:8px;
+    }
+    .insta-verified{
+      background:var(--blue);color:#fff;border-radius:50%;
+      width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;
+      font-size:.65rem;font-weight:900;box-shadow:0 0 8px var(--blue);
+    }
+    .insta-stats{display:flex;gap:14px;margin-bottom:8px}
+    .insta-stat{display:flex;flex-direction:column;align-items:center}
+    .istat-num{
+      font-family:'Orbitron',monospace;font-size:.9rem;font-weight:900;
+      color:var(--neon);text-shadow:var(--glow);
+    }
+    .istat-lbl{font-size:.68rem;color:#555;margin-top:1px}
+    .insta-bio{font-size:.75rem;color:#777;line-height:1.5}
+
+    .price-display-box{
+      text-align:center;padding:16px;
+      background:rgba(0,255,65,.03);
+      border:1px solid var(--border);border-radius:12px;
+      margin-bottom:14px;
+      animation:fadeUp .5s .2s both;
+    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    /* 2-column package grid */
+    .pkg-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px}
+    .pkg2{
+      padding:18px 10px;border-radius:13px;border:1px solid var(--border);
+      background:var(--glass);color:var(--text);cursor:pointer;text-align:center;
+      font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:600;
+      transition:all .3s;position:relative;overflow:hidden;
+    }
+    .pkg2::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(0,255,65,.06),transparent);
+      opacity:0;transition:opacity .3s;
+    }
+    .pkg2:hover::before,.pkg2.active::before{opacity:1}
+    .pkg2:hover{border-color:var(--neon);color:var(--neon);box-shadow:var(--glow);transform:translateY(-3px)}
+    .pkg2.active{background:rgba(0,255,65,.08);border-color:var(--neon);color:var(--neon);box-shadow:var(--glow)}
+    .pkg2 .p2-qty{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;margin-bottom:4px}
+    .pkg2 .p2-price{font-size:1.1rem;color:var(--neon);font-family:'Share Tech Mono',monospace;margin-bottom:4px}
+    .pkg2 .p2-orig{font-size:.78rem;color:#444;text-decoration:line-through;margin-bottom:5px}
+    .pkg2 .p2-off{
+      display:inline-block;background:var(--red);color:#fff;
+      padding:2px 9px;border-radius:20px;font-size:.68rem;font-weight:700;
+      box-shadow:0 0 8px rgba(255,51,85,.4);
+    }
+    .pkg2 .p2-best{
+      position:absolute;top:0;right:0;
+      background:var(--gold);color:#000;
+      padding:3px 10px;font-size:.6rem;font-weight:700;
+      border-radius:0 13px 0 10px;letter-spacing:.5px;
+      font-family:'Orbitron',monospace;
+    }
+
+    /* ── BLUE TICK LOGO ── */
+    .bt-logo-row{
+      display:flex;justify-content:center;align-items:center;
+      position:relative;margin-bottom:4px;
+    }
+    .bt-logo-circle{
+      width:72px;height:72px;border-radius:50%;
+      border:2px solid rgba(0,212,255,.4);
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(0,212,255,.06);
+      box-shadow:0 0 20px rgba(0,212,255,.2);
+      animation:btPulse 2s ease-in-out infinite;overflow:hidden;
+    }
+    @keyframes btPulse{0%,100%{box-shadow:0 0 20px rgba(0,212,255,.2)}50%{box-shadow:0 0 36px rgba(0,212,255,.5)}}
+    .bt-logo-img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+    .bt-tick-badge{
+      position:absolute;bottom:0;right:calc(50% - 50px);
+      background:var(--blue);color:#fff;border-radius:50%;
+      width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+      font-size:.75rem;font-weight:900;
+      box-shadow:0 0 12px var(--blue);border:2px solid #000;
+    }
+
+    /* ── UTIL ── */
+    .hidden{display:none!important}
+    .mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
+    .mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
+    .sec-title{
+      font-family:'Orbitron',monospace;font-size:clamp(.8rem,2.3vw,1rem);
+      font-weight:700;color:var(--text);margin-bottom:13px;
+      display:flex;align-items:center;gap:9px;
+    }
+    .sec-title em{color:var(--neon);text-shadow:var(--glow);font-style:normal}
+    .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-logo">⚡ DARKWEB LEAKED<br>SERVICE</div>
+  <div class="ld-line"><div class="ld-fill"></div></div>
+  <div class="ld-txt">[ INITIALIZING... ]</div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="grid-bg"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="hdr">
+      <div class="logo">⚡ DARKWEB <em>LEAKED</em></div>
+      <div class="live-dot"><div class="dot"></div>LIVE</div>
+    </div>
+  </header>
+
+  <!-- MAIN TABS -->
+  <div class="main-tabs">
+    <button class="mtab active" onclick="gotoPage('insta',this)">
+      <span>📸</span>Instagram
+    </button>
+    <button class="mtab" onclick="gotoPage('funds',this)">
+      <span>💳</span>Add Funds
+    </button>
+    <button class="mtab" onclick="gotoPage('carding',this)">
+      <span>💀</span>Carding
+    </button>
+  </div>
+
+  <div class="content">
+
+    <!-- ══════════════ INSTAGRAM PAGE ══════════════ -->
+    <div id="page-insta">
+      <div class="subnav">
+        <button class="stab active" onclick="gotoSub('followers',this)">👥 Followers</button>
+        <button class="stab" onclick="gotoSub('bluetick',this)">✅ Blue Tick</button>
+        <button class="stab" onclick="gotoSub('reviews',this)">⭐ Reviews</button>
+        <button class="stab" onclick="gotoSub('support',this)">💬 Support</button>
+      </div>
+
+      <!-- ── FOLLOWERS ── -->
+      <div id="sub-followers">
+
+        <!-- Instagram Profile Card Style -->
+        <div class="insta-profile-wrap mb16">
+          <div class="insta-profile-card">
+            <div class="insta-glow-ring">
+              <div class="insta-avatar-wrap">
+                <img src="https://i.ibb.co/nq2MKKVc/followers.jpg" alt="Followers"
+                  class="insta-avatar"
+                  onerror="this.style.background='linear-gradient(135deg,#001800,#003300)';this.removeAttribute('onerror')">
+              </div>
+            </div>
+            <div class="insta-profile-info">
+              <div class="insta-username">darkweb.service <span class="insta-verified">✓</span></div>
+              <div class="insta-stats">
+                <div class="insta-stat"><span class="istat-num" id="animCount">0</span><span class="istat-lbl">Followers</span></div>
+                <div class="insta-stat"><span class="istat-num">482</span><span class="istat-lbl">Following</span></div>
+                <div class="insta-stat"><span class="istat-num">38</span><span class="istat-lbl">Posts</span></div>
+              </div>
+              <div class="insta-bio">🔥 Premium SMM Panel<br>⚡ Fastest Delivery Guaranteed</div>
+            </div>
+          </div>
+          <!-- Badges below profile card -->
+          <div class="badges" style="justify-content:center;margin-top:10px">
+            <span class="badge b-green">PREMIUM</span>
+            <span class="badge b-red">60% OFF</span>
+            <span class="badge b-gold">FAST DELIVERY</span>
+          </div>
+        </div>
+
+        <!-- Price Display -->
+        <div class="price-display-box">
+          <div class="price-row" style="justify-content:center">
+            <span class="p-main" id="dp-price">₹160</span>
+            <span class="p-old" id="dp-orig">₹400</span>
+            <span class="p-off" id="dp-off">60% OFF</span>
+          </div>
+          <ul class="feats" style="max-width:300px;margin:8px auto 0">
+            <li>Real-Looking Accounts</li>
+            <li>Instant Start Delivery</li>
+            <li>No Password Needed</li>
+            <li>Lifetime Refill Guarantee</li>
+          </ul>
+        </div>
+
+        <!-- Live Ticker -->
+        <div class="ticker-wrap">
+          <div class="ticker-hd"><div class="dot"></div>LIVE ORDERS</div>
+          <div class="ticker-body">
+            <div class="ticker-inner" id="tickerInner"></div>
+          </div>
+        </div>
+
+        <!-- Package Selector — only 10K & 100K -->
+        <div class="card">
+          <div class="slabel">Choose Package</div>
+          <div class="pkg-grid-2" id="pkgGrid"></div>
+
+          <div class="fgrp mt16">
+            <label class="flabel">Instagram Profile Link</label>
+            <input class="finput" id="profileLink" type="text" placeholder="https://instagram.com/yourusername">
+          </div>
+
+          <div class="summary">
+            <div class="srow"><span>Package</span><span class="sv" id="s-pkg">10K Followers</span></div>
+            <div class="srow"><span>Original</span><span style="color:#444;text-decoration:line-through" id="s-orig">₹400</span></div>
+            <div class="srow"><span>You Save</span><span style="color:var(--red)" id="s-save">-₹240</span></div>
+            <div class="srow tot"><span>Total</span><span id="s-total">₹160</span></div>
+          </div>
+
+          <button class="btn" onclick="placeOrder()">⚡ PLACE ORDER</button>
+        </div>
+      </div>
+
+      <!-- ── BLUE TICK ── -->
+      <div id="sub-bluetick" class="hidden">
+        <div class="bt-card">
+          <!-- Instagram logo icon (correct image) -->
+          <div class="bt-logo-row">
+            <div class="bt-logo-circle">
+              <img src="https://i.ibb.co/DHH7szZG/instagram.png" alt="Instagram"
+                class="bt-logo-img"
+                onerror="this.outerHTML='<span style=font-size:1.8rem>📸</span>'">
+            </div>
+            <div class="bt-tick-badge">✓</div>
+          </div>
+          <div class="badges mt12" style="justify-content:center"><span class="badge b-blue">VERIFIED</span><span class="badge b-gold">1 MONTH</span></div>
+          <div class="bt-title" style="text-align:center">Instagram Blue Tick</div>
+          <div style="font-size:.82rem;color:#555;margin-bottom:10px;text-align:center">Meta Verified Badge — 1 Month Subscription</div>
+          <div class="bt-price" style="text-align:center">₹99<span style="font-size:.85rem;font-family:'Rajdhani',sans-serif;color:#666;font-weight:400"> / month</span></div>
+          <div class="bt-feats mt12">
+            <div class="bt-feat">Official Meta Verification Badge</div>
+            <div class="bt-feat">Increased Profile Credibility</div>
+            <div class="bt-feat">Priority in Search Results</div>
+            <div class="bt-feat">Exclusive Subscriber Features</div>
+            <div class="bt-feat">Valid 1 Full Month</div>
+          </div>
+          <div class="fgrp">
+            <label class="flabel">Your Instagram Username</label>
+            <input class="finput" type="text" id="btUsername" placeholder="@yourusername">
+          </div>
+          <button class="btn btn-blue-s mt12" onclick="buyBlueTick()">GET BLUE TICK — ₹99</button>
+        </div>
+      </div>
+
+      <!-- ── REVIEWS ── -->
+      <div id="sub-reviews" class="hidden">
+        <div class="sec-title"><em>Customer Reviews</em></div>
+        <div class="rev-grid mb16" id="revGrid"></div>
+
+        <!-- Write Review -->
+        <div class="card">
+          <div class="slabel">Write a Review</div>
+          <div class="star-row" id="starRow">
+            <button class="sbtn on" onclick="setStar(1)">★</button>
+            <button class="sbtn on" onclick="setStar(2)">★</button>
+            <button class="sbtn on" onclick="setStar(3)">★</button>
+            <button class="sbtn on" onclick="setStar(4)">★</button>
+            <button class="sbtn on" onclick="setStar(5)">★</button>
+          </div>
+          <div class="fgrp">
+            <label class="flabel">Your Name</label>
+            <input class="finput" id="rvName" type="text" placeholder="Enter your name">
+          </div>
+          <div class="fgrp">
+            <label class="flabel">Your Review</label>
+            <input class="finput" id="rvText" type="text" placeholder="Share your experience...">
+          </div>
+          <button class="btn mt12" onclick="submitReview()">POST REVIEW</button>
+          <div class="rev-done" id="rvDone">✅ Review Posted! Thank you.</div>
+        </div>
+      </div>
+
+      <!-- ── SUPPORT ── -->
+      <div id="sub-support" class="hidden">
+        <div class="sec-title"><em>24/7 Support</em></div>
+        <a href="https://instagram.com/yoz_haxk" target="_blank" class="sup-card">
+          <div class="sup-icon">
+            <img src="https://i.ibb.co/DHH7szZG/instagram.png" alt="Instagram"
+              onerror="this.parentElement.style.fontSize='1.6rem';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.outerHTML='📸'">
+          </div>
+          <div style="flex:1">
+            <div class="sup-lbl">Contact Support</div>
+            <div class="sup-user">@yoz_haxk</div>
+            <div class="sup-desc">DM for instant help · Active 24/7</div>
+          </div>
+          <div style="color:var(--neon);font-size:1.1rem">→</div>
+        </a>
+        <div class="card">
+          <div class="slabel">Support Info</div>
+          <div style="display:grid;gap:10px">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:9px;background:var(--glass);border:1px solid var(--border)">
+              <span style="font-size:1.2rem">⏱️</span>
+              <div><div style="font-weight:600">Response Time</div><div style="font-size:.78rem;color:#555">Usually within 5 minutes</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:9px;background:var(--glass);border:1px solid var(--border)">
+              <span style="font-size:1.2rem">💰</span>
+              <div><div style="font-weight:600">Refund Policy</div><div style="font-size:.78rem;color:#555">Full refund if not delivered</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:9px;background:var(--glass);border:1px solid var(--border)">
+              <span style="font-size:1.2rem">🔒</span>
+              <div><div style="font-weight:600">100% Safe</div><div style="font-size:.78rem;color:#555">No password required ever</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ ADD FUNDS PAGE ══════════════ -->
+    <div id="page-funds" class="hidden">
+      <div class="sec-title"><em>Add Funds</em></div>
+
+      <div class="subnav mb12">
+        <button class="stab active" onclick="gotoPayment('upi',this)">📱 UPI / QR Pay</button>
+        <button class="stab" onclick="gotoPayment('bank',this)">🏦 Bank Transfer</button>
+      </div>
+
+      <div id="pay-upi">
+        <div class="card">
+          <div class="qr-box">
+            <img src="https://i.ibb.co/mF4ZpM6t/qrcode.png" alt="QR Code" class="qr-img"
+              onerror="this.style.background='#111';this.style.padding='0'">
+            <div style="font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--neon);letter-spacing:2px">SCAN & PAY</div>
+          </div>
+          <div class="slabel">Quick Amount</div>
+          <div class="amt-pills">
+            <div class="apill" onclick="setAmt(100,this)">₹100</div>
+            <div class="apill" onclick="setAmt(250,this)">₹250</div>
+            <div class="apill" onclick="setAmt(500,this)">₹500</div>
+            <div class="apill" onclick="setAmt(1000,this)">₹1000</div>
+          </div>
+          <div class="fgrp">
+            <label class="flabel">Amount (Min ₹100 / Max ₹5000)</label>
+            <input class="finput" id="fAmt" type="number" min="100" max="5000" placeholder="Enter amount">
+          </div>
+          <div class="fgrp">
+            <label class="flabel">UTR / Transaction Number</label>
+            <input class="finput" id="fUtr" type="text" placeholder="Enter 12-digit UTR">
+          </div>
+          <button class="btn mt12" onclick="submitFund()">SUBMIT PAYMENT</button>
+          <div class="pay-ok" id="payOk">
+            <div style="font-size:1.8rem;margin-bottom:8px">⏳</div>
+            <p><strong>Payment Submitted!</strong><br><br>
+            Verification may take <strong>10–20 minutes</strong>.<br>
+            Funds will auto-credit to your account.<br><br>
+            Contact <strong>@yoz_haxk</strong> if not credited in 30 min.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="pay-bank" class="hidden">
+        <div class="card">
+          <div class="slabel">Bank Details</div>
+          <div class="summary">
+            <div class="srow"><span class="mk">Account Name</span><span class="mv">DARKWEB SERVICES</span></div>
+            <div class="srow"><span class="mk">Account No.</span><span class="mv">XXXX XXXX 9876</span></div>
+            <div class="srow"><span class="mk">IFSC Code</span><span class="mv">SBIN0012345</span></div>
+            <div class="srow"><span class="mk">Bank</span><span class="mv">State Bank of India</span></div>
+          </div>
+          <div class="fgrp mt12">
+            <label class="flabel">Amount Transferred</label>
+            <input class="finput" type="number" placeholder="Enter amount" min="100" max="5000">
+          </div>
+          <div class="fgrp">
+            <label class="flabel">Transaction Reference / UTR</label>
+            <input class="finput" type="text" placeholder="Enter reference number">
+          </div>
+          <button class="btn mt12" onclick="submitFund()">SUBMIT PAYMENT</button>
+          <div class="pay-ok" id="payOkBank">
+            <div style="font-size:1.8rem;margin-bottom:8px">⏳</div>
+            <p><strong>Payment Submitted!</strong><br><br>
+            Verification may take <strong>10–20 minutes</strong>.<br>
+            Contact <strong>@yoz_haxk</strong> if not credited in 30 min.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CARDING PAGE ══════════════ -->
+    <div id="page-carding" class="hidden">
+      <div class="card-page-hdr">
+        <h1>⚠️ CARDING SERVICES</h1>
+        <p>DEMO SHOWCASE — EDUCATIONAL ONLY</p>
+      </div>
+      <div class="card-warning">⚠️ This is a demo showcase for entertainment purposes only.</div>
+
+      <div class="crd-list">
+        <!-- Item 1 -->
+        <div class="crd-item" onclick="showCardModal('c1')">
+          <div class="crd-ico">💳</div>
+          <div class="crd-info">
+            <div class="crd-name">Balance Card</div>
+            <div class="crd-bal">₹10,000</div>
+            <div class="crd-tag">Instant · Anonymous · No KYC</div>
+          </div>
+          <div class="crd-right">
+            <div class="crd-price">₹399</div>
+            <button class="crd-btn">BUY NOW</button>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="crd-item" onclick="showCardModal('c2')">
+          <div class="crd-ico">💰</div>
+          <div class="crd-info">
+            <div class="crd-name">Premium Balance Card</div>
+            <div class="crd-bal">₹50,000</div>
+            <div class="crd-tag">2–6 Hrs · Priority · Full Anon</div>
+          </div>
+          <div class="crd-right">
+            <div class="crd-price">₹799</div>
+            <button class="crd-btn">BUY NOW</button>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="crd-item" onclick="showCardModal('c3')">
+          <div class="crd-ico">🎁</div>
+          <div class="crd-info">
+            <div class="crd-name">Redeem Code</div>
+            <div class="crd-bal">₹5,500</div>
+            <div class="crd-tag">Instant · Multi-Platform · No Expiry</div>
+          </div>
+          <div class="crd-right">
+            <div class="crd-price">₹499</div>
+            <button class="crd-btn">BUY NOW</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Feed -->
+      <div class="act-feed">
+        <div class="act-hd"><div class="act-dot-p"></div>LIVE ACTIVITY</div>
+        <div class="act-scroll">
+          <div class="act-inner" id="actInner"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <footer style="border-top:1px solid var(--border);text-align:center;padding:18px;font-family:'Share Tech Mono',monospace;font-size:.62rem;color:#333;letter-spacing:2px;position:relative;z-index:2">
+    <span style="color:var(--neon)">DARKWEB LEAKED SERVICE</span> · SECURE · ENCRYPTED<br>
+    © 2025 · Contact: @yoz_haxk
+  </footer>
+</div><!-- /app -->
+
+<!-- ORDER MODAL -->
+<div class="overlay" id="m-order">
+  <div class="mbox">
+    <button class="mclose" onclick="closeM('m-order')">✕</button>
+    <div class="mtitle">⚡ Order Confirmation</div>
+    <div id="m-order-body"></div>
+    <button class="btn mt16" onclick="confirmOrder()">CONFIRM & PAY</button>
+  </div>
+</div>
+
+<!-- BLUE TICK MODAL -->
+<div class="overlay" id="m-bt">
+  <div class="mbox" style="border-color:rgba(0,212,255,.4);box-shadow:0 0 28px rgba(0,212,255,.15)">
+    <button class="mclose" onclick="closeM('m-bt')">✕</button>
+    <div class="mtitle" style="color:var(--blue);text-shadow:0 0 12px var(--blue)">✅ Blue Tick — ₹99</div>
+    <div class="mrow"><span class="mk">Service</span><span class="mv" style="color:var(--blue)">Meta Verification Badge</span></div>
+    <div class="mrow"><span class="mk">Duration</span><span class="mv" style="color:var(--blue)">1 Month</span></div>
+    <div class="mrow"><span class="mk">Price</span><span class="mv" style="color:var(--blue)">₹99</span></div>
+    <div class="mrow"><span class="mk">Delivery</span><span class="mv" style="color:var(--blue)">24–48 Hours</span></div>
+    <p style="font-size:.78rem;color:#444;margin:13px 0">Add funds first, then DM <strong style="color:var(--neon)">@yoz_haxk</strong> with your username.</p>
+    <button class="btn btn-blue-s mt12" onclick="closeM('m-bt');gotoPageName('funds')">ADD FUNDS FIRST</button>
+  </div>
+</div>
+
+<!-- CARD MODAL -->
+<div class="overlay" id="m-card">
+  <div class="mbox mbox-purple">
+    <button class="mclose" onclick="closeM('m-card')">✕</button>
+    <div class="mtitle" id="m-card-title" style="color:var(--purple);text-shadow:0 0 12px var(--purple)"></div>
+    <div id="m-card-body"></div>
+    <button class="btn mt16" style="background:linear-gradient(135deg,var(--purple),var(--red));color:#fff;box-shadow:0 0 18px rgba(191,95,255,.4)" onclick="closeM('m-card');gotoPageName('funds')">ADD FUNDS TO ORDER</button>
+  </div>
+</div>
+
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+
+<script>
+// ── BOOT ──────────────────────────────────────────
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const l=document.getElementById('loader');
+    l.style.transition='opacity .7s';l.style.opacity='0';
+    setTimeout(()=>{l.style.display='none';document.getElementById('app').classList.add('show')},750);
+  },2600);
+});
+
+// ── PACKAGES (only 10K & 100K) ────────────────────
+const PKGS=[
+  {qty:10, lbl:'10K', price:160, orig:400,  off:'60% OFF', hot:false},
+  {qty:100,lbl:'100K',price:699, orig:1600, off:'56% OFF', hot:true },
+];
+
+let selQty=10, selStar=5;
+
+// ── PAGE / TAB SWITCHERS ───────────────────────────
+function gotoPage(id,btn){
+  ['insta','funds','carding'].forEach(p=>document.getElementById('page-'+p).classList.add('hidden'));
+  document.getElementById('page-'+id).classList.remove('hidden');
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function gotoPageName(id){
+  document.querySelectorAll('.mtab').forEach((b,i)=>{
+    b.classList.remove('active');
+    if((id==='funds'&&i===1)||(id==='carding'&&i===2)||(id==='insta'&&i===0))b.classList.add('active');
+  });
+  ['insta','funds','carding'].forEach(p=>document.getElementById('page-'+p).classList.add('hidden'));
+  document.getElementById('page-'+id).classList.remove('hidden');
+}
+
+function gotoSub(id,btn){
+  ['followers','bluetick','reviews','support'].forEach(s=>document.getElementById('sub-'+s).classList.add('hidden'));
+  document.getElementById('sub-'+id).classList.remove('hidden');
+  document.querySelectorAll('#page-insta .stab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function gotoPayment(id,btn){
+  ['upi','bank'].forEach(p=>document.getElementById('pay-'+p).classList.add('hidden'));
+  document.getElementById('pay-'+id).classList.remove('hidden');
+  document.querySelectorAll('#page-funds .stab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── BUILD PKG GRID ────────────────────────────────
+function buildPkgs(){
+  const g=document.getElementById('pkgGrid');
+  g.innerHTML=PKGS.map(p=>`
+    <div class="pkg2${p.qty===10?' active':''}" onclick="selPkg(${p.qty},this)">
+      ${p.hot?`<div class="p2-best">🔥 BEST DEAL</div>`:''}
+      <div class="p2-qty">${p.lbl}</div>
+      <div class="p2-price">₹${p.price.toLocaleString()}</div>
+      <div class="p2-orig">₹${p.orig.toLocaleString()}</div>
+      <div class="p2-off">${p.off}</div>
+    </div>
+  `).join('');
+}
+
+function selPkg(qty,el){
+  selQty=qty;
+  document.querySelectorAll('.pkg2').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const p=PKGS.find(x=>x.qty===qty);
+  document.getElementById('dp-price').textContent='₹'+p.price.toLocaleString();
+  document.getElementById('dp-orig').textContent='₹'+p.orig.toLocaleString();
+  document.getElementById('dp-off').textContent=p.off;
+  document.getElementById('s-pkg').textContent=p.lbl+'K Followers';
+  document.getElementById('s-orig').textContent='₹'+p.orig.toLocaleString();
+  document.getElementById('s-save').textContent='-₹'+(p.orig-p.price).toLocaleString();
+  document.getElementById('s-total').textContent='₹'+p.price.toLocaleString();
+}
+
+// ── TICKER ────────────────────────────────────────
+const TICKS=[
+  {n:'@rahul_***',d:'Ordered 10K Followers',a:'₹160'},
+  {n:'@priya.s***',d:'Ordered 100K Followers',a:'₹699'},
+  {n:'@xoxo_r***',d:'Ordered 20K Followers',a:'₹320'},
+  {n:'@dev.m***',d:'Ordered Blue Tick',a:'₹99'},
+  {n:'@kiran_***',d:'Ordered 50K Followers',a:'₹700'},
+  {n:'@sonia_***',d:'Ordered 30K Followers',a:'₹450'},
+  {n:'@amit.k***',d:'Ordered 70K Followers',a:'₹900'},
+  {n:'@neha.r***',d:'Ordered 10K Followers',a:'₹160'},
+];
+function buildTicker(){
+  const all=[...TICKS,...TICKS];
+  document.getElementById('tickerInner').innerHTML=all.map(d=>`
+    <div class="tick-item">
+      <div class="tick-av">${d.n[1].toUpperCase()}</div>
+      <div><div class="tick-name">${d.n}</div><div class="tick-detail">${d.d}</div></div>
+      <div class="tick-amt">${d.a}</div>
+    </div>
+  `).join('');
+}
+
+// ── REVIEWS ───────────────────────────────────────
+const REVS=[
+  {n:'Rahul Sharma',s:5,t:'10K followers 3 ghante mein aa gaye. Bilkul real lagte hain. Best service! 🔥'},
+  {n:'Priya K.',s:5,t:'Most legit panel I tried. Support is super fast. @yoz_haxk is great!'},
+  {n:'Dev Mehta',s:5,t:'100K liya sirf ₹699 mein. Delivery speed ekdum amazing thi!'},
+  {n:'Sonia M.',s:4,t:'Followers aye quickly. Support ne instant reply kiya. Very happy!'},
+  {n:'@xoxo_raj',s:5,t:'Pehle doubt tha but now I order daily. Genuine service hai bhai! 💯'},
+  {n:'Amit Singh',s:5,t:'20K sirf ₹320! Cheapest + best quality. Will order again.'},
+  {n:'Kavya R.',s:5,t:'Blue tick bhi liya ₹99 mein. Profile authentic lag rahi hai now!'},
+  {n:'Nikhil T.',s:4,t:'Fast delivery, good quality. A few dropped but sorted instantly.'},
+];
+function buildReviews(){
+  document.getElementById('revGrid').innerHTML=REVS.map(r=>`
+    <div class="rev-card">
+      <div class="rev-top">
+        <div class="rev-av">${r.n[0]}</div>
+        <div><div class="rev-name">${r.n}</div><div class="rev-stars">${'★'.repeat(r.s)}${'☆'.repeat(5-r.s)}</div></div>
+      </div>
+      <div class="rev-txt">${r.t}</div>
+      <div class="rev-tick">✅ Verified Purchase</div>
+    </div>
+  `).join('');
+}
+
+function setStar(n){
+  selStar=n;
+  document.querySelectorAll('.sbtn').forEach((b,i)=>b.classList.toggle('on',i<n));
+}
+
+function submitReview(){
+  const name=document.getElementById('rvName').value.trim();
+  const text=document.getElementById('rvText').value.trim();
+  if(!name||!text){alert('Please fill all fields!');return;}
+  const card=document.createElement('div');
+  card.className='rev-card';
+  card.innerHTML=`
+    <div class="rev-top">
+      <div class="rev-av">${name[0].toUpperCase()}</div>
+      <div><div class="rev-name">${name}</div><div class="rev-stars">${'★'.repeat(selStar)}${'☆'.repeat(5-selStar)}</div></div>
+    </div>
+    <div class="rev-txt">${text}</div>
+    <div class="rev-tick">✅ Verified Purchase</div>
+  `;
+  document.getElementById('revGrid').prepend(card);
+  document.getElementById('rvName').value='';
+  document.getElementById('rvText').value='';
+  const done=document.getElementById('rvDone');
+  done.classList.add('show');
+  setTimeout(()=>done.classList.remove('show'),3000);
+}
+
+// ── ORDER ─────────────────────────────────────────
+function placeOrder(){
+  const link=document.getElementById('profileLink').value.trim();
+  if(!link){alert('Please enter your Instagram profile link!');return;}
+  const p=PKGS.find(x=>x.qty===selQty);
+  document.getElementById('m-order-body').innerHTML=`
+    <div class="summary">
+      <div class="mrow"><span class="mk">Package</span><span class="mv">${p.lbl}K Followers</span></div>
+      <div class="mrow"><span class="mk">Profile</span><span class="mv" style="font-size:.78rem;word-break:break-all">${link}</span></div>
+      <div class="mrow"><span class="mk">Original</span><span style="color:#444;text-decoration:line-through">₹${p.orig.toLocaleString()}</span></div>
+      <div class="mrow"><span class="mk">Discount</span><span style="color:var(--red)">${p.off}</span></div>
+      <div class="mrow" style="border-top:1px solid var(--border);margin-top:7px;padding-top:11px;font-family:'Orbitron',monospace;color:var(--neon)">
+        <span>Total</span><span>₹${p.price.toLocaleString()}</span>
+      </div>
+    </div>
+  `;
+  openM('m-order');
+}
+
+function confirmOrder(){
+  closeM('m-order');
+  const p=PKGS.find(x=>x.qty===selQty);
+  gotoPageName('funds');
+  setTimeout(()=>{
+    const f=document.getElementById('fAmt');
+    if(f)f.value=p.price;
+  },300);
+}
+
+// ── BLUE TICK ─────────────────────────────────────
+function buyBlueTick(){
+  const u=document.getElementById('btUsername').value.trim();
+  if(!u){alert('Please enter your Instagram username!');return;}
+  openM('m-bt');
+}
+
+// ── FUNDS ─────────────────────────────────────────
+function setAmt(v,el){
+  document.getElementById('fAmt').value=v;
+  document.querySelectorAll('.apill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function submitFund(){
+  const amt=document.getElementById('fAmt')?document.getElementById('fAmt').value:null;
+  if(amt&&(Number(amt)<100||Number(amt)>5000)){alert('Amount must be ₹100 – ₹5000');return;}
+  document.getElementById('payOk').classList.add('show');
+}
+
+// ── CARDING ───────────────────────────────────────
+const CDATA={
+  c1:{title:'₹10,000 Balance Card',price:'₹399',bal:'₹10,000',del:'Instant'},
+  c2:{title:'₹50,000 Balance Card',price:'₹799',bal:'₹50,000',del:'2–6 Hours'},
+  c3:{title:'₹5,500 Redeem Code',  price:'₹499',bal:'₹5,500', del:'Instant'},
+};
+
+function showCardModal(id){
+  const d=CDATA[id];
+  document.getElementById('m-card-title').textContent='⚡ '+d.title;
+  document.getElementById('m-card-body').innerHTML=`
+    <div class="summary" style="border-color:rgba(191,95,255,.2);background:rgba(191,95,255,.03)">
+      <div class="mrow"><span class="mk">Type</span><span style="color:var(--purple)">${d.title}</span></div>
+      <div class="mrow"><span class="mk">Value</span><span style="color:var(--purple)">${d.bal}</span></div>
+      <div class="mrow"><span class="mk">Price</span><span style="color:var(--gold)">${d.price}</span></div>
+      <div class="mrow"><span class="mk">Delivery</span><span style="color:var(--purple)">${d.del}</span></div>
+    </div>
+    <p style="font-size:.76rem;color:#444;margin-top:11px">⚠️ Demo only. Add funds & DM <strong style="color:var(--neon)">@yoz_haxk</strong> to order.</p>
+  `;
+  openM('m-card');
+}
+
+const ACTS=[
+  {u:'user_***7x2',a:'Purchased ₹10,000 Balance Card',v:'₹399'},
+  {u:'anon_***4k9',a:'Purchased ₹50,000 Balance Card',v:'₹799'},
+  {u:'hacker_***z',a:'Purchased ₹5,500 Redeem Code',v:'₹499'},
+  {u:'dark_***88', a:'Purchased ₹10,000 Balance Card',v:'₹399'},
+  {u:'pro_***x1',  a:'Added Funds',v:'₹1,000'},
+  {u:'neo_***kz',  a:'Purchased ₹50,000 Balance Card',v:'₹799'},
+  {u:'user_***m5', a:'Purchased ₹5,500 Redeem Code',v:'₹499'},
+];
+function buildActivity(){
+  const all=[...ACTS,...ACTS];
+  document.getElementById('actInner').innerHTML=all.map(d=>`
+    <div class="act-row">
+      <div class="act-d"></div>
+      <div class="act-main" style="flex:1">
+        <div>${d.u}</div>
+        <div class="act-sub">${d.a}</div>
+      </div>
+      <div class="act-v">${d.v}</div>
+    </div>
+  `).join('');
+}
+
+// ── MODALS ────────────────────────────────────────
+function openM(id){document.getElementById(id).classList.add('open')}
+function closeM(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.overlay').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open')}));
+
+// ── INIT ──────────────────────────────────────────
+buildPkgs();
+buildTicker();
+buildReviews();
+buildActivity();
+
+// Animate follower counter
+(function animateCounter(){
+  const el=document.getElementById('animCount');
+  if(!el)return;
+  const target=10000;
+  let current=0;
+  const step=Math.ceil(target/80);
+  const timer=setInterval(()=>{
+    current+=step;
+    if(current>=target){current=target;clearInterval(timer);}
+    el.textContent=current>=1000?(current/1000).toFixed(1)+'K':current;
+  },25);
+})();
+</script>
+</body>
+</html>
