@@ -1,349 +1,376 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HackPanel Pro - Dark Web SMM Services</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DARKWEB LEAKED SERVICE — Premium SMM Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --neon:#00ff41;--neon2:#39ff14;--neon-dim:#00ff4160;
+      --glow:0 0 8px #00ff41,0 0 24px #00ff4170;
+      --glow-lg:0 0 14px #00ff41,0 0 40px #00ff4160;
+      --bg:#000;--card:rgba(0,8,0,0.92);
+      --border:rgba(0,255,65,0.2);--border2:rgba(0,255,65,0.45);
+      --glass:rgba(0,255,65,0.04);
+      --text:#ddfce8;--text-dim:#88cc99;
+      --gold:#ffd700;--blue:#00d4ff;--red:#ff3355;--purple:#bf5fff;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:#000}
+    ::-webkit-scrollbar-thumb{background:var(--neon);border-radius:3px}
+    body{background:#000;color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden}
 
-    <style>
-      body {
-        font-family: 'Share Tech Mono', monospace;
-        background-color: #050505;
-        color: #00ff66;
-        overflow-x: hidden;
-      }
-      .orbitron {
-        font-family: 'Orbitron', sans-serif;
-      }
-      .rajdhani {
-        font-family: 'Rajdhani', sans-serif;
-      }
-      /* Custom scanline effect */
-      body::before {
-        content: " ";
-        display: block;
-        position: fixed;
-        top: 0; left: 0; bottom: 0; right: 0;
-        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-        z-index: 99999;
-        opacity: 0.8;
-        pointer-events: none;
-        background-size: 100% 4px, 6px 100%;
-      }
-      /* Hacker matrix glow */
-      .matrix-glow {
-        text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
-      }
-      .border-glow {
-        box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
-      }
-      .border-glow:hover {
-        box-shadow: 0 0 15px rgba(0, 255, 102, 0.5);
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0a0a0a;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #00ff66;
-        border-radius: 3px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
+    /* ── LOADER ── */
+    #loader{
+      position:fixed;inset:0;background:#000;z-index:9999;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+    }
+    .ld-logo{
+      font-family:'Orbitron',monospace;font-size:clamp(1.1rem,4vw,1.8rem);font-weight:900;
+      color:var(--neon);text-shadow:var(--glow-lg);letter-spacing:3px;text-align:center;
+      animation:flicker 1.8s infinite;
+    }
+    .ld-line{
+      width:260px;height:3px;background:rgba(0,255,65,0.1);border-radius:2px;overflow:hidden;
+    }
+    .ld-fill{width:0;height:100%;background:var(--neon);box-shadow:var(--glow);animation:fill 2.4s ease forwards}
+    .ld-txt{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--neon-dim);letter-spacing:3px;animation:blink .9s step-end infinite}
+    @keyframes fill{to{width:100%}}
+    @keyframes blink{50%{opacity:0}}
+    @keyframes flicker{0%,100%{opacity:1}93%{opacity:.5}94%{opacity:1}97%{opacity:.8}98%{opacity:1}}
 
-    <script type="text/babel">
-      const { useState, useEffect } = React;
+    /* ── GRID BG ── */
+    #app{opacity:0;transition:opacity .7s ease;min-height:100vh;position:relative}
+    #app.show{opacity:1}
+    .grid-bg{
+      position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:linear-gradient(rgba(0,255,65,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,65,.025) 1px,transparent 1px);
+      background-size:44px 44px;
+    }
 
-      // Mock Data for Services
-      const SERVICES_DATA = [
-        { id: 1, name: "Instagram Real Followers [Instant]", category: "Instagram", price: "$0.45", speed: "10k/day", min: 10, max: 50000 },
-        { id: 2, name: "Instagram Premium Likes [Non-Drop]", category: "Instagram", price: "$0.12", speed: "Instant", min: 20, max: 10000 },
-        { id: 3, name: "Free Fire Account Boost & Coins", category: "Gaming", price: "$1.20", speed: "1-2 Hours", min: 1, max: 10 },
-        { id: 4, name: "YouTube High Retention Views", category: "YouTube", price: "$1.80", speed: "5k/day", min: 100, max: 1000000 },
-        { id: 5, name: "Telegram Channel Members [Safe]", category: "Telegram", price: "$0.60", speed: "20k/day", min: 50, max: 200000 },
-        { id: 6, name: "TikTok Viral Video Views", category: "TikTok", price: "$0.02", speed: "Ultra Fast", min: 500, max: 10000000 }
-      ];
+    /* ── HEADER ── */
+    header{
+      position:sticky;top:0;z-index:200;
+      background:rgba(0,0,0,.97);border-bottom:1px solid var(--border2);
+      backdrop-filter:blur(20px);padding:0 14px;
+    }
+    .hdr{
+      max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;
+    }
+    .logo{
+      font-family:'Orbitron',monospace;font-size:clamp(.72rem,2.4vw,1rem);font-weight:900;
+      color:var(--neon);text-shadow:var(--glow);letter-spacing:1px;
+    }
+    .logo em{color:#fff;font-style:normal}
+    .live-dot{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--neon)}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--neon);box-shadow:0 0 8px var(--neon);animation:pulse 1.3s ease-in-out infinite}
+    @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.65);opacity:.4}}
 
-      function App() {
-        const [terminalLogs, setTerminalLogs] = useState([
-          "Initializing HackPanel Core Security Protocols...",
-          "Connecting to secure proxy nodes... SUCCESS",
-          "Welcome back, User. Status: Encrypted"
-        ]);
-        const [selectedCategory, setSelectedCategory] = useState("All");
-        const [selectedService, setSelectedService] = useState(SERVICES_DATA[0]);
-        const [link, setLink] = useState("");
-        const [quantity, setQuantity] = useState(100);
-        const [orderLogs, setOrderLogs] = useState([]);
+    /* ── MAIN TABS ── */
+    .main-tabs{
+      display:flex;background:rgba(0,0,0,.95);border-bottom:1px solid var(--border);
+      position:sticky;top:56px;z-index:199;
+    }
+    .mtab{
+      flex:1;padding:13px 6px;text-align:center;
+      font-family:'Orbitron',monospace;font-size:clamp(.55rem,1.8vw,.78rem);
+      font-weight:700;letter-spacing:.5px;color:#444;
+      cursor:pointer;border:none;background:none;
+      border-bottom:2px solid transparent;transition:all .3s;text-transform:uppercase;
+    }
+    .mtab span{display:block;font-size:1rem;margin-bottom:2px}
+    .mtab:hover{color:var(--neon)}
+    .mtab.active{color:var(--neon);border-bottom-color:var(--neon);text-shadow:var(--glow);background:rgba(0,255,65,.03)}
 
-        // Live terminal logs ticker simulation
-        useEffect(() => {
-          const events = [
-            "New incoming order routed via Tor Network...",
-            "Database sync completed with server node-77X",
-            "Bypassing API rate limits... Ok.",
-            "Security layer re-encrypted. 0 vulnerabilities found.",
-            "SMM server ping latency: 42ms"
-          ];
-          const interval = setInterval(() => {
-            const randomLog = events[Math.floor(Math.random() * events.length)];
-            const time = new Date().toLocaleTimeString();
-            setTerminalLogs(prev => [...prev.slice(-4), `[${time}] ${randomLog}`]);
-          }, 7000);
-          return () => clearInterval(interval);
-        }, []);
+    /* ── CONTENT WRAP ── */
+    .content{max-width:860px;margin:0 auto;padding:18px 13px 70px;position:relative;z-index:2}
 
-        const handleOrderSubmit = (e) => {
-          e.preventDefault();
-          if (!link) {
-            alert("Please enter a valid URL/Username link.");
-            return;
-          }
-          
-          const totalPrice = (parseFloat(selectedService.price.replace('$', '')) * (quantity / 1000)).toFixed(4);
-          const time = new Date().toLocaleTimeString();
-          
-          const newLog = `[${time}] SUCCESS: Order for ${quantity}x ${selectedService.name} initialized. Cost: $${totalPrice}. Payload sent.`;
-          setOrderLogs(prev => [newLog, ...prev]);
-          setTerminalLogs(prev => [...prev, `[${time}] EXECUTING ORDER ID: ${Math.floor(Math.random()*900000+100000)}`]);
-          
-          // Reset form field
-          setLink("");
-        };
+    /* ── SUB NAV ── */
+    .subnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .stab{
+      padding:7px 16px;border:1px solid var(--border);border-radius:30px;
+      background:var(--glass);color:var(--text-dim);
+      font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:600;
+      cursor:pointer;transition:all .28s;letter-spacing:.3px;
+    }
+    .stab:hover,.stab.active{background:var(--neon);color:#000;border-color:var(--neon);box-shadow:var(--glow);font-weight:700}
 
-        const filteredServices = selectedCategory === "All" 
-          ? SERVICES_DATA 
-          : SERVICES_DATA.filter(s => s.category === selectedCategory);
+    /* ── GLASS CARD ── */
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:14px;
+      padding:20px;backdrop-filter:blur(16px);position:relative;overflow:hidden;
+      transition:border-color .3s,box-shadow .3s;margin-bottom:16px;
+    }
+    .card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,var(--neon),transparent);
+    }
+    .card:hover{border-color:var(--border2);box-shadow:0 0 18px rgba(0,255,65,.07)}
 
-        return (
-          <div className="min-h-screen bg-[#050505] p-3 md:p-6 flex flex-col justify-between">
-            
-            {/* Header / Cyber Banner */}
-            <header className="border-b border-[#00ff66]/30 pb-4 mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
-              <div>
-                <h1 className="orbitron text-3xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#00ff66] to-[#00aa44] matrix-glow">
-                  HACKPANEL PRO
-                </h1>
-                <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest">
-                  Next-Gen Dark Web Social Media Injection Terminal
-                </p>
-              </div>
-              
-              {/* Live Status Indicators */}
-              <div className="flex gap-4 text-xs">
-                <div className="bg-[#0c1a0c] border border-[#00ff66]/40 px-3 py-1.5 rounded flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#00ff66] animate-pulse"></span>
-                  <span>SYSTEM: ONLINE</span>
-                </div>
-                <div className="bg-[#0c1a0c] border border-[#00ff66]/40 px-3 py-1.5 rounded flex items-center gap-2">
-                  <span>SECURE PROXY: ACTIVE</span>
-                </div>
-              </div>
-            </header>
+    /* ── SECTION LABEL ── */
+    .slabel{
+      font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--neon);
+      letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;
+      display:flex;align-items:center;gap:8px;
+    }
+    .slabel::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 
-            {/* Main Interface Grid */}
-            <main className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-grow">
-              
-              {/* Left Side: Order & Injection Terminal Form (7 cols) */}
-              <div className="lg:col-span-7 flex flex-col gap-6">
-                
-                {/* Live Console Terminal Output */}
-                <div className="bg-[#000] border border-[#00ff66]/30 p-4 rounded text-xs font-mono text-emerald-400/90 shadow-2xl relative overflow-hidden h-36 flex flex-col justify-end">
-                  <div className="absolute top-1 left-2 text-[10px] text-gray-500 uppercase tracking-wider">System Live Terminal Log</div>
-                  <div className="space-y-1">
-                    {terminalLogs.map((log, index) => (
-                      <div key={index} className="truncate">
-                        <span className="text-[#00ff66]/50">&gt;&gt;</span> {log}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+    /* ── BADGES ── */
+    .badges{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+    .badge{
+      padding:3px 10px;border-radius:20px;
+      font-family:'Orbitron',monospace;font-size:.58rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+    }
+    .b-green{background:var(--neon);color:#000;box-shadow:var(--glow)}
+    .b-gold{background:var(--gold);color:#000;box-shadow:0 0 10px var(--gold)}
+    .b-red{background:var(--red);color:#fff;box-shadow:0 0 10px rgba(255,51,85,.5)}
+    .b-blue{background:var(--blue);color:#000;box-shadow:0 0 10px var(--blue)}
 
-                {/* Main Order Placement Box */}
-                <div className="bg-[#0a0a0a] border-2 border-[#00ff66]/20 p-5 md:p-6 rounded-lg border-glow transition-all duration-300">
-                  <h2 className="orbitron text-xl font-bold mb-4 flex items-center gap-2 text-white border-b border-[#00ff66]/20 pb-2">
-                    <span className="text-[#00ff66]">&lt;/&gt;</span> NEW EXPLOIT INJECTION
-                  </h2>
+    /* ── SERVICE HERO ── */
+    .hero-grid{display:grid;grid-template-columns:180px 1fr;gap:18px;margin-bottom:18px}
+    @media(max-width:520px){.hero-grid{grid-template-columns:1fr}}
+    .hero-img{
+      border-radius:12px;overflow:hidden;border:1px solid var(--border2);
+      box-shadow:0 0 22px rgba(0,255,65,.12);position:relative;
+    }
+    .hero-img img{width:100%;height:100%;object-fit:cover;display:block;min-height:180px}
+    .hero-img .shimmer{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,65,.04),transparent);pointer-events:none}
 
-                  <form onSubmit={handleOrderSubmit} className="space-y-4">
-                    
-                    {/* Category Selector Buttons */}
-                    <div>
-                      <label className="block text-xs uppercase text-gray-400 mb-2">Target Module Group</label>
-                      <div className="flex flex-wrap gap-2">
-                        {["All", "Instagram", "YouTube", "Telegram", "Gaming"].map((cat) => (
-                          <button
-                            type="button"
-                            key={cat}
-                            onClick={() => {
-                              setSelectedCategory(cat);
-                              const found = SERVICES_DATA.find(s => cat === "All" || s.category === cat);
-                              if (found) setSelectedService(found);
-                            }}
-                            className={`px-3 py-1.5 text-xs rounded border uppercase font-semibold transition-all ${
-                              selectedCategory === cat 
-                                ? "bg-[#00ff66] text-black border-[#00ff66]" 
-                                : "bg-transparent text-[#00ff66] border-[#00ff66]/30 hover:bg-[#00ff66]/10"
-                            }`}
-                          >
-                            {cat}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+    .svc-title{
+      font-family:'Orbitron',monospace;font-size:clamp(.95rem,2.8vw,1.3rem);
+      font-weight:900;color:var(--neon);text-shadow:var(--glow);margin-bottom:8px;
+    }
+    .price-row{display:flex;align-items:baseline;gap:9px;margin-bottom:8px;flex-wrap:wrap}
+    .p-main{font-family:'Orbitron',monospace;font-size:clamp(1.4rem,5vw,2rem);font-weight:900;color:var(--neon);text-shadow:var(--glow-lg)}
+    .p-old{font-size:.95rem;color:#444;text-decoration:line-through}
+    .p-off{background:var(--red);color:#fff;padding:2px 8px;border-radius:20px;font-size:.72rem;font-weight:700;box-shadow:0 0 8px rgba(255,51,85,.4)}
+    .feats{list-style:none;margin:6px 0}
+    .feats li{display:flex;align-items:center;gap:7px;font-size:.88rem;color:var(--text-dim);padding:3px 0}
+    .feats li::before{content:'▸';color:var(--neon);font-size:.55rem}
 
-                    {/* Service Dropdown Selector */}
-                    <div>
-                      <label className="block text-xs uppercase text-gray-400 mb-1.5">Select Specific Script Payload</label>
-                      <select 
-                        className="w-full bg-[#0d0d0d] border border-[#00ff66]/30 text-[#00ff66] rounded p-2.5 text-sm focus:outline-none focus:border-[#00ff66]"
-                        value={selectedService.id}
-                        onChange={(e) => {
-                          const target = SERVICES_DATA.find(s => s.id === parseInt(e.target.value));
-                          if (target) setSelectedService(target);
-                        }}
-                      >
-                        {filteredServices.map(service => (
-                          <option key={service.id} value={service.id}>
-                            {service.name} — ({service.price}/K)
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+    /* ── PKG GRID ── */
+    .pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:9px}
+    .pkg{
+      padding:11px 6px;border-radius:10px;border:1px solid var(--border);
+      background:var(--glass);color:var(--text);cursor:pointer;text-align:center;
+      font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:600;
+      transition:all .28s;position:relative;
+    }
+    .pkg:hover{border-color:var(--neon);color:var(--neon);box-shadow:var(--glow);transform:translateY(-2px)}
+    .pkg.active{background:rgba(0,255,65,.1);border-color:var(--neon);color:var(--neon);box-shadow:var(--glow)}
+    .pkg .qa{font-weight:700;font-size:.95rem}
+    .pkg .qp{font-size:.78rem;color:var(--neon);font-family:'Share Tech Mono',monospace}
+    .pkg .qo{position:absolute;top:-7px;right:-3px;background:var(--red);color:#fff;font-size:.52rem;padding:1px 5px;border-radius:10px;font-weight:700}
 
-                    {/* Target Link Input Box */}
-                    <div>
-                      <label className="block text-xs uppercase text-gray-400 mb-1.5">Target Destination URL / Username</label>
-                      <input 
-                        type="text"
-                        required
-                        placeholder="https://www.instagram.com/username/ or channel link..."
-                        className="w-full bg-[#0d0d0d] border border-[#00ff66]/30 text-[#00ff66] placeholder-emerald-900/60 rounded p-2.5 text-sm focus:outline-none focus:border-[#00ff66]"
-                        value={link}
-                        onChange={(e) => setLink(e.target.value)}
-                      />
-                    </div>
+    /* ── FORM ── */
+    .fgrp{margin:13px 0}
+    .flabel{font-family:'Share Tech Mono',monospace;font-size:.66rem;color:var(--neon);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;display:block}
+    .finput{
+      width:100%;padding:12px 15px;background:rgba(0,255,65,.03);
+      border:1px solid var(--border);border-radius:10px;color:var(--text);
+      font-family:'Rajdhani',sans-serif;font-size:.98rem;font-weight:500;
+      outline:none;transition:all .28s;
+    }
+    .finput:focus{border-color:var(--neon);box-shadow:0 0 12px rgba(0,255,65,.18);background:rgba(0,255,65,.06)}
+    .finput::placeholder{color:#2a2a2a}
 
-                    {/* Quantity Selector Slider / Numeric Box */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs uppercase text-gray-400 mb-1.5">Injection Multiplier (Quantity)</label>
-                        <input 
-                          type="number"
-                          min={selectedService.min}
-                          max={selectedService.max}
-                          className="w-full bg-[#0d0d0d] border border-[#00ff66]/30 text-[#00ff66] rounded p-2.5 text-sm focus:outline-none focus:border-[#00ff66]"
-                          value={quantity}
-                          onChange={(e) => setQuantity(parseInt(e.target.value) || 0)}
-                        />
-                        <div className="text-[10px] text-gray-500 mt-1">
-                          Min: {selectedService.min} | Max: {selectedService.max}
-                        </div>
-                      </div>
+    /* ── ORDER SUMMARY ── */
+    .summary{background:rgba(0,255,65,.04);border:1px solid var(--border);border-radius:11px;padding:15px;margin:14px 0}
+    .srow{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:.9rem}
+    .srow.tot{border-top:1px solid var(--border);margin-top:8px;padding-top:11px;font-family:'Orbitron',monospace;font-size:1rem;color:var(--neon);text-shadow:var(--glow)}
+    .sv{color:var(--neon);font-weight:600}
 
-                      {/* Display Box for dynamically calculated pricing info */}
-                      <div className="bg-[#0f1f12]/40 border border-[#00ff66]/20 rounded p-3 flex flex-col justify-center">
-                        <span className="text-[10px] uppercase text-gray-400">Estimated Resource Charge</span>
-                        <span className="orbitron text-2xl font-bold text-white">
-                          ${(parseFloat(selectedService.price.replace('$', '')) * (quantity / 1000)).toFixed(4)}
-                        </span>
-                        <span className="text-[10px] text-emerald-500 font-sans">Speed Matrix: {selectedService.speed}</span>
-                      </div>
-                    </div>
+    /* ── BUTTON ── */
+    .btn{
+      width:100%;padding:15px;background:var(--neon);border:none;border-radius:11px;
+      color:#000;font-family:'Orbitron',monospace;font-size:.82rem;font-weight:900;
+      letter-spacing:2px;cursor:pointer;text-transform:uppercase;
+      transition:all .28s;box-shadow:var(--glow);
+    }
+    .btn:hover{box-shadow:var(--glow-lg);transform:translateY(-1px);background:var(--neon2)}
+    .btn:active{transform:scale(.97)}
+    .btn-outline{
+      background:transparent;border:2px solid var(--neon);color:var(--neon);box-shadow:var(--glow);
+    }
+    .btn-outline:hover{background:var(--neon);color:#000}
+    .btn-blue-s{
+      background:var(--blue);color:#000;box-shadow:0 0 14px rgba(0,212,255,.5);
+      font-family:'Orbitron',monospace;font-weight:900;
+    }
+    .btn-blue-s:hover{box-shadow:0 0 28px rgba(0,212,255,.7)}
 
-                    {/* Form Execution Action Button */}
-                    <button 
-                      type="submit" 
-                      className="w-full bg-[#00ff66] text-black hover:bg-[#00cc52] font-bold py-3 px-4 rounded transition-all tracking-wider orbitron uppercase text-sm shadow-[0_0_15px_rgba(0,255,102,0.3)] hover:shadow-[0_0_25px_rgba(0,255,102,0.6)]"
-                    >
-                      🚀 FIRE EXPLOIT INJECTION
-                    </button>
+    /* ── TICKER ── */
+    .ticker-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+    .ticker-hd{
+      background:rgba(0,255,65,.06);padding:8px 13px;
+      display:flex;align-items:center;gap:7px;
+      font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--neon);letter-spacing:2px;
+      border-bottom:1px solid var(--border);
+    }
+    .ticker-body{height:135px;overflow:hidden}
+    .ticker-inner{animation:scroll 18s linear infinite}
+    @keyframes scroll{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+    .tick-item{
+      display:flex;align-items:center;gap:10px;
+      padding:8px 13px;border-bottom:1px solid rgba(0,255,65,.05);
+    }
+    .tick-av{
+      width:30px;height:30px;border-radius:50%;
+      background:linear-gradient(135deg,var(--neon),#005a18);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:.72rem;color:#000;flex-shrink:0;
+    }
+    .tick-name{color:var(--text);font-weight:600;font-size:.83rem}
+    .tick-detail{color:#444;font-size:.75rem}
+    .tick-amt{margin-left:auto;color:var(--neon);font-family:'Share Tech Mono',monospace;font-size:.78rem}
 
-                  </form>
-                </div>
-              </div>
+    /* ── REVIEWS ── */
+    .rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    @media(max-width:480px){.rev-grid{grid-template-columns:1fr}}
+    .rev-card{
+      background:rgba(0,8,0,.95);border:1px solid var(--border);border-radius:12px;padding:13px;
+      transition:all .28s;
+    }
+    .rev-card:hover{border-color:var(--neon);transform:translateY(-2px);box-shadow:0 0 12px rgba(0,255,65,.09)}
+    .rev-top{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+    .rev-av{
+      width:34px;height:34px;border-radius:50%;
+      background:linear-gradient(135deg,#00ff41,#005a18);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:.82rem;color:#000;flex-shrink:0;
+    }
+    .rev-name{font-weight:700;font-size:.88rem;color:var(--text)}
+    .rev-stars{color:var(--gold);font-size:.72rem}
+    .rev-txt{font-size:.82rem;color:#888;line-height:1.5}
+    .rev-tick{font-size:.68rem;color:var(--neon);display:flex;align-items:center;gap:4px;margin-top:5px}
 
-              {/* Right Side: Services Directory Matrix & Successful Injection Output Logs (5 cols) */}
-              <div className="lg:col-span-5 flex flex-col gap-6">
-                
-                {/* Available Network Payload Menu Display */}
-                <div className="bg-[#0a0a0a] border border-[#00ff66]/20 p-4 rounded-lg flex-grow flex flex-col">
-                  <h3 className="orbitron text-sm font-bold text-white tracking-wider mb-3 uppercase border-b border-[#00ff66]/20 pb-1.5 flex justify-between items-center">
-                    <span>📡 ACTIVE BOTNET SERVICES</span>
-                    <span className="text-[11px] text-gray-500 font-mono">Count: {filteredServices.length}</span>
-                  </h3>
-                  
-                  <div className="space-y-2.5 overflow-y-auto max-h-[340px] pr-1">
-                    {filteredServices.map(service => (
-                      <div 
-                        key={service.id}
-                        onClick={() => setSelectedService(service)}
-                        className={`p-2.5 rounded border text-xs transition-all cursor-pointer flex justify-between items-center ${
-                          selectedService.id === service.id 
-                            ? "bg-[#00ff66]/10 border-[#00ff66]" 
-                            : "bg-[#050505] border-[#00ff66]/20 hover:border-[#00ff66]/50"
-                        }`}
-                      >
-                        <div className="space-y-0.5 max-w-[75%]">
-                          <div className="font-bold text-white truncate">{service.name}</div>
-                          <div className="text-[10px] text-gray-400">Delivery Node Bandwidth: {service.speed}</div>
-                        </div>
-                        <div className="text-right">
-                          <span className="font-mono text-[#00ff66] font-bold block">{service.price}</span>
-                          <span className="text-[9px] bg-zinc-800 text-zinc-400 px-1 rounded uppercase">{service.category}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+    /* ── WRITE REVIEW ── */
+    .star-row{display:flex;gap:5px;margin:7px 0}
+    .sbtn{font-size:1.3rem;background:none;border:none;cursor:pointer;color:#222;transition:all .2s}
+    .sbtn.on,.sbtn:hover{color:var(--gold);text-shadow:0 0 8px var(--gold)}
+    .rev-done{text-align:center;padding:12px;color:var(--neon);font-family:'Share Tech Mono',monospace;font-size:.85rem;display:none}
+    .rev-done.show{display:block}
 
-                {/* Successful Order History Log Area */}
-                <div className="bg-[#000] border border-[#00ff66]/20 p-4 rounded-lg h-44 flex flex-col">
-                  <h4 className="text-xs uppercase font-bold text-gray-400 tracking-wider mb-2 border-b border-[#00ff66]/10 pb-1">
-                    📜 Session Injection Records
-                  </h4>
-                  <div className="overflow-y-auto flex-grow font-mono text-[11px] space-y-1.5 pr-1">
-                    {orderLogs.length === 0 ? (
-                      <div className="text-zinc-600 text-center pt-8 italic">No active payloads deployed in this session.</div>
-                    ) : (
-                      orderLogs.map((log, idx) => (
-                        <div key={idx} className="text-emerald-300 bg-[#071409] p-1.5 rounded border border-emerald-900/40 leading-tight">
-                          {log}
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </div>
+    /* ── SUPPORT ── */
+    .sup-card{
+      display:flex;align-items:center;gap:14px;padding:16px;border-radius:13px;
+      background:linear-gradient(135deg,rgba(0,255,65,.05),rgba(0,60,20,.06));
+      border:1px solid var(--border2);transition:all .3s;text-decoration:none;margin-bottom:14px;
+    }
+    .sup-card:hover{box-shadow:0 0 26px rgba(0,255,65,.13);transform:translateY(-2px);border-color:var(--neon)}
+    .sup-icon{width:48px;height:48px;border-radius:12px;overflow:hidden;flex-shrink:0;border:1px solid var(--border2)}
+    .sup-icon img{width:100%;height:100%;object-fit:cover}
+    .sup-lbl{font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--neon);letter-spacing:2px;margin-bottom:2px}
+    .sup-user{font-family:'Orbitron',monospace;font-size:.95rem;font-weight:700;color:var(--neon);text-shadow:var(--glow)}
+    .sup-desc{font-size:.78rem;color:#555;margin-top:2px}
 
-              </div>
-            </main>
+    /* ── BLUE TICK SECTION ── */
+    .bt-card{
+      background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(0,5,20,.95));
+      border:1px solid rgba(0,212,255,.25);border-radius:14px;padding:22px;
+      position:relative;overflow:hidden;transition:all .3s;margin-bottom:16px;
+    }
+    .bt-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,var(--blue),transparent);
+    }
+    .bt-card:hover{border-color:var(--blue);box-shadow:0 0 28px rgba(0,212,255,.12)}
+    .bt-icon{font-size:2.4rem;margin-bottom:8px}
+    .bt-title{font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:700;color:var(--blue);text-shadow:0 0 12px var(--blue);margin-bottom:4px}
+    .bt-price{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:900;color:var(--blue);text-shadow:0 0 16px var(--blue)}
+    .bt-feats{margin:12px 0}
+    .bt-feat{font-size:.84rem;color:rgba(0,212,255,.7);padding:3px 0;display:flex;align-items:center;gap:6px}
+    .bt-feat::before{content:'◆';font-size:.52rem;color:var(--blue)}
 
-            {/* Footer Status */}
-            <footer className="mt-6 border-t border-[#00ff66]/20 pt-3 text-center text-[10px] text-zinc-500 font-mono tracking-widest uppercase">
-              HackPanel Automated API Gateway // Encrypted End-to-End Node Secure Client
-            </footer>
+    /* ── ADD FUNDS ── */
+    .qr-box{text-align:center;margin:14px 0;display:flex;flex-direction:column;align-items:center;gap:9px}
+    .qr-img{width:170px;height:170px;object-fit:contain;border:2px solid var(--border2);border-radius:12px;box-shadow:0 0 22px rgba(0,255,65,.18);padding:7px;background:#fff}
+    .amt-pills{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:12px 0}
+    .apill{
+      padding:9px;text-align:center;border:1px solid var(--border);border-radius:8px;cursor:pointer;
+      font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--text-dim);
+      background:var(--glass);transition:all .28s;
+    }
+    .apill:hover,.apill.active{border-color:var(--neon);color:var(--neon);background:rgba(0,255,65,.07);box-shadow:var(--glow)}
+    .pay-ok{
+      background:rgba(0,255,65,.07);border:1px solid var(--neon);border-radius:11px;
+      padding:16px;text-align:center;margin-top:13px;display:none;
+    }
+    .pay-ok.show{display:block}
+    .pay-ok p{font-size:.88rem;color:var(--text-dim);line-height:1.7}
+    .pay-ok strong{color:var(--neon)}
 
-          </div>
-        );
-      }
+    /* ── CARDING PAGE ── */
+    #page-carding{
+      min-height:80vh;
+      background:radial-gradient(ellipse at 50% 0%, rgba(191,95,255,.07) 0%, transparent 60%),
+                 radial-gradient(ellipse at 80% 80%, rgba(255,51,85,.05) 0%, transparent 50%),
+                 #000;
+    }
+    .card-page-hdr{
+      text-align:center;padding:30px 0 22px;
+    }
+    .card-page-hdr h1{
+      font-family:'Orbitron',monospace;font-size:clamp(1.1rem,4vw,1.9rem);font-weight:900;
+      background:linear-gradient(135deg,#bf5fff,#ff3355,#ff9500);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      text-shadow:none;margin-bottom:6px;animation:flicker 3s infinite;
+    }
+    .card-page-hdr p{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:#444;letter-spacing:2px}
+    .card-warning{
+      background:rgba(191,95,255,.06);border:1px solid rgba(191,95,255,.25);
+      border-radius:9px;padding:9px 13px;font-size:.75rem;color:rgba(191,95,255,.8);
+      text-align:center;margin-bottom:18px;font-family:'Share Tech Mono',monospace;letter-spacing:1px;
+    }
 
-      // Render the React application inside DOM root layout element
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(<App />);
-    </script>
-  </body>
-</html>
+    /* Card items — simple clean */
+    .crd-list{display:flex;flex-direction:column;gap:12px;margin:10px 0}
+    .crd-item{
+      background:rgba(10,0,20,.95);border:1px solid rgba(191,95,255,.18);
+      border-radius:13px;padding:18px 18px 16px;
+      display:flex;align-items:center;gap:14px;
+      transition:all .35s;cursor:pointer;position:relative;overflow:hidden;
+    }
+    .crd-item::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(191,95,255,.6),transparent);
+    }
+    .crd-item::after{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(circle at 20% 50%,rgba(191,95,255,.04),transparent 60%);
+      pointer-events:none;
+    }
+    .crd-item:hover{
+      border-color:rgba(191,95,255,.5);
+      box-shadow:0 0 24px rgba(191,95,255,.15);
+      transform:translateY(-2px);
+    }
+    .crd-ico{
+      width:48px;height:48px;border-radius:12px;flex-shrink:0;
+      background:linear-gradient(135deg,rgba(191,95,255,.2),rgba(255,51,85,.1));
+      border:1px solid rgba(191,95,255,.3);
+      display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+    }
+    .crd-info{flex:1}
+    .crd-name{font-family:'Orbitron',monospace;font-size:.82rem;font-weight:700;color:#ddd;margin-bottom:4px}
+    .crd-bal{font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;color:var(--purple);text-shadow:0 0 10px var(--purple)}
+    .crd-tag{font-size:.72rem;color:#555;font-family:'Share Tech Mono',monospace;margin-top:2px}
+    .crd-right{text-align:right;flex-shrink:0}
+    .crd-price{font-family:'Orbitron',monospace;font-size:1rem;font-weight:900;color:var(--gold);text-shadow:0 0 10px var(--gold)}
+    .crd-btn{
+      margin-top:7px;padding:7px 14px;
+      background:linear-gradient(135deg,rgba(191,95,255,.15),rgba(255,51,85,.1));
+      border:1px solid rgba(191,95,255,.4);border-radius:20px;
+      color:var(--purple);font-family:'Orbitron',monospace;font-size:.58rem;font-weight:700;
+      cursor:pointer;transition:all .28s;letter-spacing:.5px;white-space:nowrap;
+    }
+    .crd-btn:hover{background:var(--purple);color:#000;box-shadow:0 0 16px rgba(191,95,255,.5)}
+
+    /* Carding activity */
+    .act-feed{border:1px solid rgba(191,95,255,.18);border-radius:12px;overflow:hidden;margin-top:18px}
+    .act-hd{
+      background:rgba(191,95,255,.06);padding:9px 13px;
+      display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(191,95,255,.15);
+      font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--purple);letter-
